@@ -8,6 +8,7 @@ public class ObjectInteract : MonoBehaviour
     [SerializeField] private GameObject intercateText;
 
     private SpriteRenderer spriteRenderer;
+    [SerializeField] float range;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,10 @@ public class ObjectInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if (gameObject.CompareTag("Player")<range)
+        //{
+            
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -26,7 +30,7 @@ public class ObjectInteract : MonoBehaviour
         if (coll.gameObject.CompareTag("Player"))
         {
             intercateText.SetActive(true);
-            if (Input.GetKeyDown("m"))
+            if (Input.GetKeyDown("c"))
             {
                 Debug.Log("color");
                 spriteRenderer.color = Color.green;
@@ -36,11 +40,12 @@ public class ObjectInteract : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D coll)
     {
+        //Debug.Log("color");
         if (coll.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKeyDown("m"))
+            if (Input.GetKeyDown("c"))
             {
-                Debug.Log("color");
+                
                 spriteRenderer.color = Color.green;
             }
         }
@@ -48,9 +53,18 @@ public class ObjectInteract : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D coll)
     {
+        
         if (coll.gameObject.CompareTag("Player"))
         {
             intercateText.SetActive(false);
         }
+    }
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }
