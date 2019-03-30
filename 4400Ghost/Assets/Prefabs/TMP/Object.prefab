@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3213802482264946480}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intercateText: {fileID: 3213802482955965510}
-  range: 1.5
 --- !u!1 &3213802482955965510
 GameObject:
   m_ObjectHideFlags: 0

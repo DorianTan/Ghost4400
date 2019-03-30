@@ -102,11 +102,11 @@ public class BSPTest : MonoBehaviour
         }
     }
 
-    bool nik;
+   // bool nik;
 
     private void OnDrawGizmos()
     {
-        if (nik) return;
+        //if (nik) return;
         foreach (Leaf l in leafs)
         {
             if (l.leftChild==null || l.rightChild==null)
@@ -117,7 +117,7 @@ public class BSPTest : MonoBehaviour
             }
         }
 
-        nik = true;
+        //nik = true;
     }
 }
 
