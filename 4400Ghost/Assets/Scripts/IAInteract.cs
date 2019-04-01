@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class IAInteract : MonoBehaviour
 {
     [SerializeField] private Slider CarburantSlider;
-    // [SerializeField] float range;
-    [SerializeField] float IAFear=0;
-    [SerializeField] GameObject Player;
+    public static float IAFear=0;
 
 
     // Start is called before the first frame update
@@ -22,17 +20,4 @@ public class IAInteract : MonoBehaviour
     {
         CarburantSlider.value = IAFear;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Object"))
-        {
-            
-        }
-    }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(transform.position, range);
-    //}
 }

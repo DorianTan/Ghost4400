@@ -9,6 +9,8 @@ public class ObjectInteract : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     //[SerializeField] float range;
+    bool ObjectIsGreen = false;
+    bool IAIsNear = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,17 +33,27 @@ public class ObjectInteract : MonoBehaviour
         {
             intercateText.SetActive(true);          
         }
+        if (coll.gameObject.CompareTag("IA"))
+        {
+            IAIsNear = true;
+        }
     }
-
     void OnTriggerStay2D(Collider2D coll)
     {
-        //Debug.Log("color");
+        if (ObjectIsGreen == true) return;
         if (coll.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyDown("c"))
             {
                 spriteRenderer.color = Color.green;
-
+                if (IAIsNear)
+                {
+                    Debug.Log("IAIsNear");
+                    IAInteract.IAFear += 1;
+                }
+                
+                ObjectIsGreen = true;
+                Debug.Log("ObjectIsGreen=true");
             }
         }
     }
@@ -53,9 +65,12 @@ public class ObjectInteract : MonoBehaviour
         {
             intercateText.SetActive(false);
         }
+        if (coll.gameObject.CompareTag("IA"))
+        {
+            IAIsNear = false;
+        }
     }
-
-
+    
 
     //void OnDrawGizmosSelected()
     //{
