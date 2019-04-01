@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class EndPanel : MonoBehaviour
 {
-    public GameObject ui;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    [SerializeField] GameObject endPanel;
 
     // Update is called once per frame
     void Update()
@@ -19,12 +15,18 @@ public class PauseMenu : MonoBehaviour
         {
             Toggle();
         }
+
+        if (Timer.time >= 5f)
+        {
+            Toggle();
+            endPanel.SetActive(true);
+        }
     }
     public void Toggle() // marche pour le bouton "continue"
     {
-        ui.SetActive(!ui.activeSelf); //plus simple pour basculer d'un état à l'autre
+        endPanel.SetActive(!endPanel.activeSelf); //plus simple pour basculer d'un état à l'autre
 
-        if (ui.activeSelf)
+        if (endPanel.activeSelf)
         {
             Time.timeScale = 0f;
         }
@@ -36,14 +38,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Retry()
     {
-        Toggle(); //être sûr que le temps est arrêter
         SceneManager.LoadScene("Scenes/Mecanics");
         IAInteract.IAFear = 0;
-
-    }
-
-    public void Menu()
-    {
-       //SceneManager.LoadScene("Scenes/MainMenu");
     }
 }
