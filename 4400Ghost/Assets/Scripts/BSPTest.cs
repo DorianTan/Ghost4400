@@ -7,7 +7,7 @@ public class Leaf
 {
     
 
-    private const  int MIN_LEAF_SIZE = 20;
+    private const  int MIN_LEAF_SIZE = 32;
  
     public int y, x, width, height; // the position and size of this Leaf
  
