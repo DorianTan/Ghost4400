@@ -5,40 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class EndPanel : MonoBehaviour
 {
-
-    [SerializeField] GameObject endPanel;
+    [SerializeField] private GameObject endPanelWin;
+    [SerializeField] GameObject endPanelLose;
+    [SerializeField] private float partyTime=25f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Timer.time >= partyTime)// durée d'une partie en secondes si le joueur perds  
         {
-            Toggle();
+            endPanelLose.SetActive(true);
+            Timer.time=partyTime; 
         }
 
-        if (Timer.time >= 5f)
+        if (IAInteract.IAFear==10)
         {
-            Toggle();
-            endPanel.SetActive(true);
+            endPanelWin.SetActive(true);
+            Time.timeScale = 0;
         }
-    }
-    public void Toggle() // marche pour le bouton "continue"
-    {
-        endPanel.SetActive(!endPanel.activeSelf); //plus simple pour basculer d'un état à l'autre
 
-        if (endPanel.activeSelf)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
     }
 
     public void Retry()
     {
         SceneManager.LoadScene("Scenes/Mecanics");
         IAInteract.IAFear = 0;
+        Time.timeScale = 1;
     }
 }

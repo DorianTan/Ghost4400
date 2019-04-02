@@ -18,15 +18,6 @@ public class ObjectInteract : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (gameObject.CompareTag("Player")<range)
-        //{
-            
-        //}
-    }
-
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Player"))

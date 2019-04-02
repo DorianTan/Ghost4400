@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject ui;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject pausePanel;
 
     // Update is called once per frame
     void Update()
@@ -22,9 +17,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void Toggle() // marche pour le bouton "continue"
     {
-        ui.SetActive(!ui.activeSelf); //plus simple pour basculer d'un état à l'autre
+        pausePanel.SetActive(!pausePanel.activeSelf); //plus simple pour basculer d'un état à l'autre
 
-        if (ui.activeSelf)
+        if (pausePanel.activeSelf)
         {
             Time.timeScale = 0f;
         }
