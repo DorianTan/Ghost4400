@@ -150,25 +150,25 @@ public class BSPTest3 : MonoBehaviour
     }
 }
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(BSPTest3))]
-public class BspSeedEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        BSPTest3 myTarget = (BSPTest3)target;
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(BSPTest3))]
+//public class BspSeedEditor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        BSPTest3 myTarget = (BSPTest3)target;
 
-        if (GUILayout.Button("Generate"))
-        {
-            myTarget.Generate();
-        }
+//        if (GUILayout.Button("Generate"))
+//        {
+//            myTarget.Generate();
+//        }
 
-        if (GUILayout.Button("Clear"))
-        {
-            myTarget.Clear();
-        }
+//        if (GUILayout.Button("Clear"))
+//        {
+//            myTarget.Clear();
+//        }
 
-        DrawDefaultInspector();
-    }
-}
-#endif
+//        DrawDefaultInspector();
+//    }
+//}
+//#endif
