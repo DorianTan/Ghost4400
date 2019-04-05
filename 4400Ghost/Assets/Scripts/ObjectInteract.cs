@@ -40,7 +40,7 @@ public class ObjectInteract : MonoBehaviour
                 if (IAIsNear)
                 {
                     Debug.Log("IAIsNear");
-                    IAInteract.IAFear += 1;
+                    IAInteract.IAFear += 10;
                 }
                 
                 ObjectIsGreen = true;

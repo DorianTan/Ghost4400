@@ -7,7 +7,8 @@ public class EndPanel : MonoBehaviour
 {
     [SerializeField] private GameObject endPanelWin;
     [SerializeField] GameObject endPanelLose;
-    [SerializeField] private float partyTime=25f;
+    [SerializeField] float partyTime=25f;
+    [SerializeField] private Rigidbody2D rgPlayer;
 
     // Update is called once per frame
     void Update()
@@ -16,7 +17,9 @@ public class EndPanel : MonoBehaviour
         if (Timer.time >= partyTime)// durée d'une partie en secondes si le joueur perds  
         {
             endPanelLose.SetActive(true);
-            Timer.time=partyTime; 
+            Timer.time=partyTime;
+            Time.timeScale = 0;
+
         }
 
         if (IAInteract.IAFear==10)
@@ -27,10 +30,13 @@ public class EndPanel : MonoBehaviour
 
     }
 
+
     public void Retry()
     {
         SceneManager.LoadScene("Scenes/Mecanics");
         IAInteract.IAFear = 0;
         Time.timeScale = 1;
+        Debug.Log(("fkjsh"));
+        
     }
 }

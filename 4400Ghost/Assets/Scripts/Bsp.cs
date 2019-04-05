@@ -56,6 +56,8 @@ public class Bsp : MonoBehaviour
         _RootRoom.children.AddRange(CheckDivision(_RootRoom));
         _RootRoom = CreateDoor(_RootRoom);
 
+        GenerateRoom(_RootRoom);
+
     }
 
     void GenerateRoom(Room rootRoom)
@@ -127,7 +129,7 @@ public class Bsp : MonoBehaviour
     }
 
 
-    void GenerateCells()
+    public void GenerateCells()
     {
         int currentRoom = 0;
         foreach (Room leaf in leafRoom)
@@ -405,6 +407,8 @@ public class BspSeedEditor : Editor
         if (GUILayout.Button("Generate"))
         {
             myTarget.Generate();
+            myTarget.GenerateCells();
+            myTarget.GenerateTile();
         }
 
         if (GUILayout.Button("Clear"))
