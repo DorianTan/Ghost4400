@@ -2704,7 +2704,7 @@ PrefabInstance:
     - target: {fileID: 4581539501158961992, guid: 8fa4e6151dbd4fb45904538b79b1971d,
         type: 3}
       propertyPath: partyTime
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fa4e6151dbd4fb45904538b79b1971d, type: 3}

@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -14,6 +15,7 @@ public class PauseMenu : MonoBehaviour
         {
             Toggle();
         }
+      
     }
     public void Toggle() // marche pour le bouton "continue"
     {
@@ -39,6 +41,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Menu()
     {
-       //SceneManager.LoadScene("Scenes/MainMenu");
+       SceneManager.LoadScene("Scenes/MainMenu");
     }
 }

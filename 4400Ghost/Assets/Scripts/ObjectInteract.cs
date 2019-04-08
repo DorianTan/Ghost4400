@@ -39,12 +39,10 @@ public class ObjectInteract : MonoBehaviour
                 spriteRenderer.color = Color.green;
                 if (IAIsNear)
                 {
-                    Debug.Log("IAIsNear");
                     IAInteract.IAFear += 10;
                 }
                 
                 ObjectIsGreen = true;
-                Debug.Log("ObjectIsGreen=true");
             }
         }
     }
