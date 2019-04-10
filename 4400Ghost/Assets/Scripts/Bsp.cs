@@ -17,6 +17,7 @@ public class Bsp : MonoBehaviour
     [Range(0, 50)] [SerializeField] int roomSizeY;
 
     public Tilemap tilemap;
+    public Tilemap tilemapWall;
     public Tile tile;
 
     private List<Room> leafRoom;
@@ -264,7 +265,7 @@ public class Bsp : MonoBehaviour
                 if (cells[x, y].isNotFree)
                 {
                     tile.color = new Color(0, 0, 0);
-                    tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                    tilemapWall.SetTile(new Vector3Int(x, y, 0), tile);
                 }
                 else
                 {
