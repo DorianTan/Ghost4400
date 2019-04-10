@@ -24,11 +24,14 @@ public class Bsp : MonoBehaviour
 
     private List<Color> colors;
 
+    [SerializeField] GameObject Object;
+
     struct Cell
     {
         public int room;
         public bool isNotFree;
         public Vector2Int position;
+
     }
 
     private Cell[,] cells;
@@ -40,6 +43,7 @@ public class Bsp : MonoBehaviour
         public Vector2 doorPosition;
         public List<Room> children;
         public List<Cell> cell;
+        public string name;
     }
 
     Room _RootRoom;
@@ -55,9 +59,8 @@ public class Bsp : MonoBehaviour
 
         _RootRoom.children.AddRange(CheckDivision(_RootRoom));
         _RootRoom = CreateDoor(_RootRoom);
-
-        GenerateRoom(_RootRoom);
-
+        
+        
     }
 
     void GenerateRoom(Room rootRoom)
@@ -75,6 +78,46 @@ public class Bsp : MonoBehaviour
         }
 
         doors.Add(Vector3Int.FloorToInt(rootRoom.doorPosition));
+
+    }
+
+    public void GenerateObjectInteract()
+    {
+        foreach (Room leaf in leafRoom)
+        {
+            Vector2Int freePosition = GetSpawn(leaf.cell);
+            Debug.Log(freePosition);
+            Instantiate(Object,new Vector3(freePosition.x+0.5f,freePosition.y+0.5f),Quaternion.identity);
+
+            freePosition = GetSpawn(leaf.cell);
+            Debug.Log(freePosition);
+            Instantiate(Object, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f), Quaternion.identity);
+        }
+    }
+
+    private Vector2Int GetSpawn(List<Cell>LeafCell)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            Cell cell = LeafCell[Random.Range(0, LeafCell.Count)];
+            BoundsInt bounds = new BoundsInt(-1, -1, 0, 3, 3, 1);
+            int freecell = 0;
+            foreach (Vector3Int b in bounds.allPositionsWithin)
+            {
+                if (cell.position.x + b.x < 0 || cell.position.x - b.x > sizeX*2)
+                    break;
+                if (cell.position.y + b.y < 0 || cell.position.y - b.y > sizeY*2)
+                    break;
+                if (cells[cell.position.x+b.x,cell.position.y+b.y].isNotFree|| cells[cell.position.x + b.x, cell.position.y + b.y].room<0)
+                break;
+                freecell++;
+            }
+            if (freecell==9)return cell.position;
+            
+        }
+        Debug.Log("Spawn not found");
+        return Vector2Int.zero; //Spawn not found
+        
     }
 
     [SerializeField] private int Seed;
@@ -126,6 +169,7 @@ public class Bsp : MonoBehaviour
         GenerateRoom(_RootRoom);
         GenerateCells();
         GenerateTile();
+        GenerateObjectInteract();
     }
 
 
@@ -198,6 +242,14 @@ public class Bsp : MonoBehaviour
                     cells[newDoor.x + b.x, newDoor.y + b.y].room = -1;
                     cells[newDoor.x + b.x, newDoor.y + b.y].isNotFree = false;
                 }
+            }
+        }
+
+        foreach (Cell cell in cells)
+        {
+            if (cell.room>=0)
+            {
+                leafRoom[cell.room].cell.Add(cell);
             }
         }
 
