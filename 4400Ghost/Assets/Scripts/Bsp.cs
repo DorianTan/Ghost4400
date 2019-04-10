@@ -184,7 +184,6 @@ public class Bsp : MonoBehaviour
                 cells[wall.x, wall.y].position = new Vector2Int(wall.x, wall.y);
 
             }
-
             currentRoom++;
         }
         foreach (Vector3Int door in doors)
