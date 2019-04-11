@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         Toggle(); //être sûr que le temps est arrêter
-        SceneManager.LoadScene("Scenes/Mecanics");
+        SceneManager.LoadScene("Scenes/Lvl");
         IAInteract.IAFear = 0;
 
     }

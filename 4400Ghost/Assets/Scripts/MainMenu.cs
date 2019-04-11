@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
-        SceneManager.LoadScene("Scenes/Mecanics");
+        SceneManager.LoadScene("Scenes/Lvl");
     }
 
     public void BtnCredit()

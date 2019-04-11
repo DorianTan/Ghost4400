@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,6 +27,10 @@ public class Bsp : MonoBehaviour
     private List<Color> colors;
 
     [SerializeField] GameObject Object;
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject NPC;
+
+
 
     struct Cell
     {
@@ -89,16 +94,18 @@ public class Bsp : MonoBehaviour
             Vector2Int freePosition = GetSpawn(leaf.cell);
             Debug.Log(freePosition);
             Instantiate(Object,new Vector3(freePosition.x+0.5f,freePosition.y+0.5f),Quaternion.identity);
+            cells[freePosition.x, freePosition.y].isNotFree = true;
 
             freePosition = GetSpawn(leaf.cell);
             Debug.Log(freePosition);
             Instantiate(Object, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f), Quaternion.identity);
+            cells[freePosition.x, freePosition.y].isNotFree=true;
         }
     }
 
     private Vector2Int GetSpawn(List<Cell>LeafCell)
     {
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 10000; i++) // if 10000 turn around and don't find any spawn
         {
             Cell cell = LeafCell[Random.Range(0, LeafCell.Count)];
             BoundsInt bounds = new BoundsInt(-1, -1, 0, 3, 3, 1);
@@ -171,6 +178,7 @@ public class Bsp : MonoBehaviour
         GenerateCells();
         GenerateTile();
         GenerateObjectInteract();
+        GeneratePlayerAndNPC();
     }
 
 
@@ -445,6 +453,35 @@ public class Bsp : MonoBehaviour
             DrawRoom(roomChild);
         }
 
+    }
+
+   public void  GeneratePlayerAndNPC()
+   {
+       Vector2Int PlayerPosition = Vector2Int.zero;
+       Vector2Int NPCPosition= Vector2Int.zero;
+
+       for (int i = 0; i < 10000; i++)
+       {
+           Room room = leafRoom[Random.Range(0, leafRoom.Count)];
+           PlayerPosition = GetSpawn(room.cell);
+           if (PlayerPosition!=Vector2Int.zero)
+           {
+               break;
+           }
+       }
+       Player.transform.position = new Vector3(PlayerPosition.x + 0.5f, PlayerPosition.y + 0.5f);
+
+
+        for (int i = 0; i < 10000; i++)
+        {
+           Room room = leafRoom[Random.Range(0, leafRoom.Count)];
+           NPCPosition = GetSpawn(room.cell);
+           if (NPCPosition != Vector2Int.zero)
+           {
+               break;
+           }
+        }
+           Instantiate(NPC, new Vector3(NPCPosition.x + 0.5f, NPCPosition.y + 0.5f), Quaternion.identity);
     }
 }
 

@@ -31,7 +31,7 @@ public class EndPanel : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("Scenes/Mecanics");
+        SceneManager.LoadScene("Scenes/Lvl");
         endPanelLose.SetActive(false);
         endPanelWin.SetActive(false);
         IAInteract.IAFear = 0;
