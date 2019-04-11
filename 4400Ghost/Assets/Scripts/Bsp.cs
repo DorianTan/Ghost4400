@@ -14,6 +14,10 @@ public class Bsp : MonoBehaviour
     [Range(0, 50)] [SerializeField] int sizeX;
     [Range(0, 50)] [SerializeField] int sizeY;
 
+    public int SizeX => sizeX;
+
+    public int SizeY => sizeY;
+
     [Range(0, 50)] [SerializeField] int roomSizeX;
     [Range(0, 50)] [SerializeField] int roomSizeY;
 
@@ -32,7 +36,7 @@ public class Bsp : MonoBehaviour
 
 
 
-    struct Cell
+    public struct Cell
     {
         public int room;
         public bool isNotFree;
@@ -41,6 +45,8 @@ public class Bsp : MonoBehaviour
     }
 
     private Cell[,] cells;
+
+    public Cell[,] Cells => cells;
     //Struct
     struct Room
     {
@@ -179,6 +185,8 @@ public class Bsp : MonoBehaviour
         GenerateTile();
         GenerateObjectInteract();
         GeneratePlayerAndNPC();
+        GameManager.Instance.Dijkstra.GenerateGraph(cells);
+        StartCoroutine(GameManager.Instance.Dijkstra.BFS(Player.transform.position, NPC.transform.position));
     }
 
 

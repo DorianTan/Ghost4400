@@ -14,8 +14,10 @@ public class IAInteract : MonoBehaviour
     {
         CarburantSlider.maxValue = 10;
         CarburantSlider.value = IAFear;
+
+        
     }
-    // Update is called once per frame
+  
     void Update()
     {
         CarburantSlider.value = IAFear;
