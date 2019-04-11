@@ -481,7 +481,7 @@ public class Bsp : MonoBehaviour
                break;
            }
         }
-           Instantiate(NPC, new Vector3(NPCPosition.x + 0.5f, NPCPosition.y + 0.5f), Quaternion.identity);
+       NPC.transform.position = new Vector3(NPCPosition.x + 0.5f, NPCPosition.y + 0.5f);
     }
 }
 
