@@ -532,6 +532,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 670917079454359488, guid: 2aa2742402a4f314facc4cfd6bf5f1a9,
+        type: 3}
+      propertyPath: CarburantSlider
+      value: 
+      objectReference: {fileID: 2058078134}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa2742402a4f314facc4cfd6bf5f1a9, type: 3}
 --- !u!1 &964353485 stripped
@@ -540,6 +545,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 964353484}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &964353486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964353485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0118db84eaa5f8545b220e3fa13823b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followingPath: []
+  indexPath: 0
 --- !u!1 &1082665957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,3 +1319,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1695117994}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2058078134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 334681243622894450, guid: c16d021c746c0934b8eee713a7d1aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1695117994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

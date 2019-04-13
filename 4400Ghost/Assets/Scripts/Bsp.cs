@@ -186,7 +186,6 @@ public class Bsp : MonoBehaviour
         GenerateObjectInteract();
         GeneratePlayerAndNPC();
         GameManager.Instance.Dijkstra.GenerateGraph(cells);
-        StartCoroutine(GameManager.Instance.Dijkstra.BFS(Player.transform.position, NPC.transform.position));
     }
 
 

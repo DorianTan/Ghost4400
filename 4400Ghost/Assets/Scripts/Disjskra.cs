@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[Serializable]
+
 public class Node
 {
     public List<Node> neighbors;
@@ -23,8 +24,6 @@ public class Disjskra : MonoBehaviour
 
     private int sizeX;
     private int sizeY;
-
-    private List<Node> openList;
 
    Node[,] graph;
 
@@ -69,6 +68,14 @@ public class Disjskra : MonoBehaviour
                     if(graph[i + b.x, j + b.y] == null) continue;
                     if(!graph[i + b.x, j + b.y].isFree) continue;
 
+
+                    if (b.x != 0 || b.y != 0)
+                    {
+                        if (graph[i, j + b.y] == null) continue;
+                        if (!graph[i, j + b.y].isFree) continue;
+                        if (graph[i + b.x, j] == null) continue;
+                        if (!graph[i + b.x, j].isFree) continue;
+                    }
                     node.neighbors.Add(graph[i + b.x, j + b.y]);
                 }
             }
@@ -76,12 +83,14 @@ public class Disjskra : MonoBehaviour
         
     }
 
-    public IEnumerator BFS(Vector2 startPos, Vector2 goalPos)
+
+    public List<Vector2> BFS(Vector2 startPos, Vector2 goalPos)
     {
+        List<Vector2> Path=new List<Vector2>();
         Node startingNode = GetNodeNearly(startPos);
         Node goalNode = GetNodeNearly(goalPos);
 
-        openList = new List<Node> { startingNode };
+        List<Node> openList = new List<Node> { startingNode };
         List<Node> closedList = new List<Node>();
 
         int crashValue = 1000;
@@ -106,23 +115,18 @@ public class Disjskra : MonoBehaviour
                 foreach (Node currentNodeNeighbor in currentNode.neighbors)
                 {
 
-                    float modifier; //not diagonals
-                    if (currentNode.pos.x == currentNodeNeighbor.pos.x ||
-                        currentNode.pos.y == currentNodeNeighbor.pos.y)
+                    if (currentNodeNeighbor.hasBeenVisited) continue;
+                    if (openList.Contains(currentNodeNeighbor)) continue;
+                    if (currentNodeNeighbor.cameFrom != null)
                     {
-                        modifier = 10;
+                        if (Vector2.Distance(currentNodeNeighbor.cameFrom.pos, goalPos) <
+                            Vector2.Distance(currentNode.pos, goalPos)) continue;
                     }
-                    else
-                    {
-                        modifier = 14;
-                    }
-
                     currentNodeNeighbor.cameFrom = currentNode;
                     openList.Add(currentNodeNeighbor);
                 }
             }
 
-            yield return new WaitForSeconds(0.0001f);
         }
 
         if (crashValue <= 0)
@@ -138,13 +142,13 @@ public class Disjskra : MonoBehaviour
             {
                 currentNode.isPath = true;
                 currentNode = currentNode.cameFrom;
-
-                yield return new WaitForSeconds(0.01f);
+                Path.Add(currentNode.pos);
             }
 
             currentNode.isPath = true;
         }
-
+        ResetNode();
+        return Path;
     }
 
     Node GetNodeNearly(Vector2 pos)
@@ -165,6 +169,18 @@ public class Disjskra : MonoBehaviour
 
         return returnNode;
 
+    }
+
+    void ResetNode()
+    {
+        foreach (Node node in graph)
+        {
+            if (node == null) continue;
+            node.cameFrom=new Node();
+            node.hasBeenVisited = false;
+            node.isPath = false;
+        
+        }
     }
 
     void OnDrawGizmos() {
