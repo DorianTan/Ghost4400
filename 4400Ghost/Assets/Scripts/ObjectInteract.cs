@@ -7,15 +7,18 @@ public class ObjectInteract : MonoBehaviour
 {
     [SerializeField] private GameObject intercateText;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRendererIDL;
+
+    [SerializeField] private Sprite Broken;
+
     //[SerializeField] float range;
-    bool ObjectIsGreen = false;
+    bool ObjectIsBroken = false;
     bool IAIsNear = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRendererIDL = GetComponentInChildren<SpriteRenderer>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -31,18 +34,20 @@ public class ObjectInteract : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (ObjectIsGreen == true) return;
+        if (ObjectIsBroken == true) return;
+
         if (coll.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyDown("c"))
             {
-                spriteRenderer.color = Color.green;
+                               
+                spriteRendererIDL.sprite = Broken;
                 if (IAIsNear)
                 {
                     IAInteract.IAFear += 10;
                 }
                 
-                ObjectIsGreen = true;
+                ObjectIsBroken = true;
             }
         }
     }
@@ -59,11 +64,4 @@ public class ObjectInteract : MonoBehaviour
             IAIsNear = false;
         }
     }
-    
-
-    //void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawWireSphere(transform.position, range);
-    //}
 }

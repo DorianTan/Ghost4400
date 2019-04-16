@@ -30,10 +30,13 @@ public class Bsp : MonoBehaviour
 
     private List<Color> colors;
 
-    [SerializeField] GameObject Object;
+
     [SerializeField] GameObject Player;
     [SerializeField] GameObject NPC;
 
+
+    [SerializeField] private GameObject Armoire;
+    [SerializeField] private GameObject Pot;
 
 
     public struct Cell
@@ -97,15 +100,56 @@ public class Bsp : MonoBehaviour
     {
         foreach (Room leaf in leafRoom)
         {
-            Vector2Int freePosition = GetSpawn(leaf.cell);
-            Debug.Log(freePosition);
-            Instantiate(Object,new Vector3(freePosition.x+0.5f,freePosition.y+0.5f),Quaternion.identity);
-            cells[freePosition.x, freePosition.y].isNotFree = true;
+            for (int i = 0; i < 2; i++)
+            {
 
-            freePosition = GetSpawn(leaf.cell);
-            Debug.Log(freePosition);
-            Instantiate(Object, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f), Quaternion.identity);
-            cells[freePosition.x, freePosition.y].isNotFree=true;
+
+                int Objectforspawn = Random.Range(0, 2);
+
+                switch (Objectforspawn)
+                {
+                    case 0:
+                        Vector2Int freePosition = GetSpawn(leaf.cell);
+                        Debug.Log(freePosition);
+                        Instantiate(Pot, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
+                            Quaternion.identity);
+                        cells[freePosition.x, freePosition.y].isNotFree = true;
+                        BoundsInt bounds = new BoundsInt(-1, -1, 0, 3, 3, 1);
+                        foreach (Vector3Int b in bounds.allPositionsWithin)
+                        {
+                            if (freePosition.x + b.x < 0 || freePosition.x + b.x > sizeX * 2)
+                                continue;
+                            if (freePosition.y + b.y < 0 || freePosition.y + b.y > sizeY * 2)
+                                continue;
+                            if (cells[freePosition.x + b.x, freePosition.y + b.y].isNotFree)
+                                continue;
+                            cells[freePosition.x + b.x, freePosition.y + b.y].isNotFree = true;
+                        }
+
+                        break;
+
+                    case 1:
+                        freePosition = GetSpawn(leaf.cell);
+                        Debug.Log(freePosition);
+                        Instantiate(Armoire, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
+                            Quaternion.identity);
+                        cells[freePosition.x, freePosition.y].isNotFree = true;
+                        BoundsInt bounds2 = new BoundsInt(-1, -1, 0, 3, 3, 1);
+                        foreach (Vector3Int b in bounds2.allPositionsWithin)
+                        {
+                            if (freePosition.x + b.x < 0 || freePosition.x + b.x > sizeX * 2)
+                                continue;
+                            if (freePosition.y + b.y < 0 || freePosition.y + b.y > sizeY * 2)
+                                continue;
+                            if (cells[freePosition.x + b.x, freePosition.y + b.y].isNotFree)
+                                continue;
+                            cells[freePosition.x + b.x, freePosition.y + b.y].isNotFree = true;
+                        }
+
+                        break;
+                }
+            }
+
         }
     }
 
@@ -440,6 +484,15 @@ public class Bsp : MonoBehaviour
     void OnDrawGizmos()
     {
         DrawRoom(_RootRoom);
+
+        foreach (Cell cell in cells)
+        {
+            if (cell.isNotFree)
+            {
+                Gizmos.color=Color.green;
+                Gizmos.DrawCube(new Vector3(cell.position.x,cell.position.y), Vector3.one);
+            }
+        }
 
     }
 

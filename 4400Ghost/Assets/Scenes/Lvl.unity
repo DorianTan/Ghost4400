@@ -477,6 +477,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IA
       objectReference: {fileID: 0}
+    - target: {fileID: 670917079454359503, guid: 2aa2742402a4f314facc4cfd6bf5f1a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 670917079454359489, guid: 2aa2742402a4f314facc4cfd6bf5f1a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -537,6 +542,11 @@ PrefabInstance:
       propertyPath: CarburantSlider
       value: 
       objectReference: {fileID: 2058078134}
+    - target: {fileID: 670917078014830056, guid: 2aa2742402a4f314facc4cfd6bf5f1a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa2742402a4f314facc4cfd6bf5f1a9, type: 3}
 --- !u!1 &964353485 stripped
@@ -766,6 +776,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9132539575290923840, guid: 5d78f4a6f4a593c4f83b22efb73f6fe5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9132539575290923845, guid: 5d78f4a6f4a593c4f83b22efb73f6fe5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -820,6 +835,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466468900587334779, guid: 5d78f4a6f4a593c4f83b22efb73f6fe5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d78f4a6f4a593c4f83b22efb73f6fe5, type: 3}
@@ -1295,9 +1315,10 @@ MonoBehaviour:
   tilemap: {fileID: 1572156018}
   tilemapWall: {fileID: 1290040042}
   tile: {fileID: 11400000, guid: afdb0d9156cb7d841af06a7684bb8c4c, type: 2}
-  Object: {fileID: 3213802482264946484, guid: c4767595b29873e4fade1f5b303606bb, type: 3}
   Player: {fileID: 397504312}
   NPC: {fileID: 964353485}
+  Armoire: {fileID: 2433817392811538587, guid: 3238f0b4a1419ba47a86da23fb93d373, type: 3}
+  Pot: {fileID: 3213802482264946484, guid: c4767595b29873e4fade1f5b303606bb, type: 3}
   Seed: 0
 --- !u!4 &1872568032
 Transform:
