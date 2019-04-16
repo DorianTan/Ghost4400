@@ -21,10 +21,13 @@ public class MovementsTest : MonoBehaviour
     {
         Vector2 moveInput=new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         moveVelocity = moveInput.normalized * speed;
+
+        transform.up = rb.velocity;
+
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position+moveVelocity*Time.fixedDeltaTime);
+        rb.velocity=moveVelocity;
     }
 }

@@ -7,32 +7,36 @@ public class IAMove : MonoBehaviour
     public List<Vector2> followingPath;
     public int indexPath;
 
-    private Rigidbody2D rg;
+    private Rigidbody2D rb;
 
     void Start()
     {
         Invoke("FollowIA",5);
-        rg = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        transform.up = rb.velocity;
     }
 
     public void FollowPath()
     {
 
-        if (indexPath >= followingPath.Count-2) //don't touch before change
+        if (indexPath >= followingPath.Count-1) //don't touch before change
         {
-            rg.velocity= Vector2.zero;
+            rb.velocity= Vector2.zero;
             FollowIA();
             return;
         }
 
-        rg.velocity = followingPath[indexPath] - (Vector2)transform.position;
-        rg.velocity = rg.velocity.normalized * 2f;
+        rb.velocity = followingPath[indexPath] - (Vector2)transform.position;
+        rb.velocity = rb.velocity.normalized * GameManager.Instance.speedIA;
 
-        if (Vector2.Distance(transform.position, followingPath[indexPath]) < 0.5f)
+        if (Vector2.Distance(transform.position, followingPath[indexPath]) < 0.2f)
         {
             indexPath++;
         }
-
     }
 
     private void FixedUpdate()
@@ -40,14 +44,13 @@ public class IAMove : MonoBehaviour
         if (followingPath!=null)
         {
             FollowPath();
-        }
-        
+        }      
     }
 
     void FollowIA()
     {
         followingPath =
-            GameManager.Instance.Dijkstra.BFS(new Vector2(Random.Range(0, 50), Random.Range(0, 50)),
+            GameManager.Instance.Dijkstra.BFS(GameManager.Instance.BspScript.targetList[Random.Range(0, GameManager.Instance.BspScript.targetList.Count)].transform.position,
                 transform.position);
         indexPath = 0;
         FollowPath();

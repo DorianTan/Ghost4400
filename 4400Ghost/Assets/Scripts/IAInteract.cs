@@ -14,7 +14,6 @@ public class IAInteract : MonoBehaviour
     {
         CarburantSlider.maxValue = 10;
         CarburantSlider.value = IAFear;
-
         
     }
   

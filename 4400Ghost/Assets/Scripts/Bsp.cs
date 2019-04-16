@@ -38,6 +38,7 @@ public class Bsp : MonoBehaviour
     [SerializeField] private GameObject Armoire;
     [SerializeField] private GameObject Pot;
 
+    public List<GameObject> targetList;
 
     public struct Cell
     {
@@ -46,7 +47,6 @@ public class Bsp : MonoBehaviour
         public Vector2Int position;
 
     }
-
     private Cell[,] cells;
 
     public Cell[,] Cells => cells;
@@ -62,6 +62,9 @@ public class Bsp : MonoBehaviour
     }
 
     Room _RootRoom;
+
+
+    
 
     public void Generate()
     {
@@ -96,14 +99,14 @@ public class Bsp : MonoBehaviour
 
     }
 
+
     public void GenerateObjectInteract()
     {
         foreach (Room leaf in leafRoom)
         {
             for (int i = 0; i < 2; i++)
             {
-
-
+                
                 int Objectforspawn = Random.Range(0, 2);
 
                 switch (Objectforspawn)
@@ -111,8 +114,9 @@ public class Bsp : MonoBehaviour
                     case 0:
                         Vector2Int freePosition = GetSpawn(leaf.cell);
                         Debug.Log(freePosition);
-                        Instantiate(Pot, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
+                        GameObject target=Instantiate(Pot, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
                             Quaternion.identity);
+                        targetList.Add(target);
                         cells[freePosition.x, freePosition.y].isNotFree = true;
                         BoundsInt bounds = new BoundsInt(-1, -1, 0, 3, 3, 1);
                         foreach (Vector3Int b in bounds.allPositionsWithin)
@@ -131,8 +135,9 @@ public class Bsp : MonoBehaviour
                     case 1:
                         freePosition = GetSpawn(leaf.cell);
                         Debug.Log(freePosition);
-                        Instantiate(Armoire, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
+                        GameObject target2=Instantiate(Armoire, new Vector3(freePosition.x + 0.5f, freePosition.y + 0.5f),
                             Quaternion.identity);
+                        targetList.Add(target2);
                         cells[freePosition.x, freePosition.y].isNotFree = true;
                         BoundsInt bounds2 = new BoundsInt(-1, -1, 0, 3, 3, 1);
                         foreach (Vector3Int b in bounds2.allPositionsWithin)
@@ -183,6 +188,8 @@ public class Bsp : MonoBehaviour
 
     private void Start()
     {
+        targetList = new List<GameObject>();
+
         cells = new Cell[sizeX * 2, sizeY * 2];
         for (int x = 0; x < sizeX * 2; x++)
         {
@@ -292,6 +299,7 @@ public class Bsp : MonoBehaviour
         }
         foreach (Vector3Int door in doors)
         {
+            if (door==Vector3Int.zero)continue;
             BoundsInt newBounds = new BoundsInt(-1, -1, 0, 3, 3, 1);
             foreach (Vector2Int b in newBounds.allPositionsWithin)
             {
@@ -544,28 +552,3 @@ public class Bsp : MonoBehaviour
        NPC.transform.position = new Vector3(NPCPosition.x + 0.5f, NPCPosition.y + 0.5f);
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(Bsp))]
-public class BspSeedEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        Bsp myTarget = (Bsp)target;
-
-        if (GUILayout.Button("Generate"))
-        {
-            myTarget.Generate();
-            myTarget.GenerateCells();
-            myTarget.GenerateTile();
-        }
-
-        if (GUILayout.Button("Clear"))
-        {
-            myTarget.Clear();
-        }
-
-        DrawDefaultInspector();
-    }
-}
-#endif

@@ -142,6 +142,7 @@ public class Disjskra : MonoBehaviour
             {
                 currentNode.isPath = true;
                 currentNode = currentNode.cameFrom;
+                Debug.Log(currentNode.pos);
                 Path.Add(currentNode.pos);
             }
 

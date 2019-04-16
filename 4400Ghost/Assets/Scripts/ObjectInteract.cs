@@ -44,12 +44,20 @@ public class ObjectInteract : MonoBehaviour
                 spriteRendererIDL.sprite = Broken;
                 if (IAIsNear)
                 {
-                    IAInteract.IAFear += 10;
+                    IAInteract.IAFear += 2;
+                    StartCoroutine(fearMove());
                 }
                 
                 ObjectIsBroken = true;
             }
         }
+    }
+
+    IEnumerator fearMove()
+    {
+        GameManager.Instance.speedIA *= 2;
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.speedIA /= 2;
     }
 
     void OnTriggerExit2D(Collider2D coll)

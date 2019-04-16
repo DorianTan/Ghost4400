@@ -20,9 +20,13 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
-        SceneManager.LoadScene("Scenes/Lvl");
+        SceneManager.LoadScene("Scenes/Controls");
     }
 
+    public void BtnPlay()
+    {
+        SceneManager.LoadScene("Scenes/Lvl");
+    }
     public void BtnCredit()
     {
         CreditsPanel.SetActive(true);
