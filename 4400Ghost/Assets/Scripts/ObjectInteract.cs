@@ -15,10 +15,16 @@ public class ObjectInteract : MonoBehaviour
     bool ObjectIsBroken = false;
     bool IAIsNear = false;
 
+    private AudioSource ArmoireSound;
+    private AudioSource PotSound;
+
     // Start is called before the first frame update
     void Start()
     {
         spriteRendererIDL = GetComponentInChildren<SpriteRenderer>();
+
+        ArmoireSound = GetComponent<AudioSource>();
+        PotSound = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -41,8 +47,18 @@ public class ObjectInteract : MonoBehaviour
             if (Input.GetKeyDown("c"))
             {                              
                 spriteRendererIDL.sprite = Broken;
+
+                if (gameObject.tag=="Armoire")
+                {
+                    ArmoireSound.Play();
+                }
+                else
+                {
+                    PotSound.Play();
+                }
                 if (IAIsNear)
                 {
+                    
                     IAInteract.IAFear += 2;
                     StartCoroutine(fearMove());
                 }
