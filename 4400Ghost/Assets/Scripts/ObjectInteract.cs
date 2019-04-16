@@ -25,6 +25,7 @@ public class ObjectInteract : MonoBehaviour
 
         ArmoireSound = GetComponent<AudioSource>();
         PotSound = GetComponent<AudioSource>();
+        
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -58,9 +59,9 @@ public class ObjectInteract : MonoBehaviour
                 }
                 if (IAIsNear)
                 {
-                    
                     IAInteract.IAFear += 2;
                     StartCoroutine(fearMove());
+                   // GameManager.Instance.IAInteract.GirlScream.Play();
                 }
                 
                 ObjectIsBroken = true;

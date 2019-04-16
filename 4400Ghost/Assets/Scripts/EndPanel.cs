@@ -29,9 +29,9 @@ public class EndPanel : MonoBehaviour
     }
 
 
-    public void Retry()
+    public void Menu()
     {
-        SceneManager.LoadScene("Scenes/Lvl");
+        SceneManager.LoadScene("Scenes/MainMenu");
         endPanelLose.SetActive(false);
         endPanelWin.SetActive(false);
         IAInteract.IAFear = 0;

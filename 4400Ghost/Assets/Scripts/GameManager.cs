@@ -19,6 +19,14 @@ public class GameManager : MonoBehaviour
         set { bspScript = value; }
     }
 
+    private IAInteract iAIntercat;
+    public IAInteract IAInteract
+    {
+        get { return iAIntercat; }
+        set { iAIntercat = value; }
+    }
+
+
     private Disjskra dijkstra;
 
     public Disjskra Dijkstra
