@@ -39,8 +39,7 @@ public class ObjectInteract : MonoBehaviour
         if (coll.gameObject.CompareTag("Player"))
         {
             if (Input.GetKeyDown("c"))
-            {
-                               
+            {                              
                 spriteRendererIDL.sprite = Broken;
                 if (IAIsNear)
                 {
@@ -55,9 +54,9 @@ public class ObjectInteract : MonoBehaviour
 
     IEnumerator fearMove()
     {
-        GameManager.Instance.speedIA *= 2;
+        GameManager.Instance.speedIA *= 3;
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.speedIA /= 2;
+        GameManager.Instance.speedIA /= 3;
     }
 
     void OnTriggerExit2D(Collider2D coll)

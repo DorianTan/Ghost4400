@@ -33,7 +33,7 @@ public class IAMove : MonoBehaviour
         rb.velocity = followingPath[indexPath] - (Vector2)transform.position;
         rb.velocity = rb.velocity.normalized * GameManager.Instance.speedIA;
 
-        if (Vector2.Distance(transform.position, followingPath[indexPath]) < 0.2f)
+        if (Vector2.Distance(transform.position, followingPath[indexPath]) < 0.5f)
         {
             indexPath++;
         }
